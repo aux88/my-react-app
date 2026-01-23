@@ -1,0 +1,82 @@
+.task {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    padding-right: 52px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    border-left-width: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.task input[type="checkbox"] {
+    color-scheme: light;
+    width: 20px;
+    height: 20px;
+    accent-color: #0d6efd;
+}
+
+.task label {
+    flex-grow: 1;
+    font-size: 16px;
+    color: #333;
+}
+
+
+.task label:hover {
+    background-color: #eee;
+}
+
+.task:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.highPriority {
+    border-left-color: #dc3545;
+}
+
+.mediumPriority {
+    border-left-color: #ffc107;
+}
+
+.lowPriority {
+    border-left-color: #198754;
+}
+
+.deleteButton {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    padding: 0;
+    transform: translateY(-50%);
+    background: transparent;
+    color: #c94f4f;
+    border: none;
+    border-radius: 2px;
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    line-height: 0;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out, background-color 0.2s ease, color 0.2s ease;
+}
+
+.task:hover .deleteButton {
+    opacity: 1;
+}
+
+.deleteButton:hover {
+    background-color: #eee;
+}
+
+.delete {
+    opacity: 0.5;
+    text-decoration: line-through;
+}

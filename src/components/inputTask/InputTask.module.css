@@ -1,0 +1,18 @@
+.addTask {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    align-items: center;
+}
+
+.addTask input[type="text"] {
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.addTask input[type="text"]::placeholder {
+    color: #ced4da;
+}

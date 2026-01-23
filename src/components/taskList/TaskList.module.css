@@ -1,0 +1,7 @@
+.taskList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: #1a1a1a;
+    padding-left: 0;
+}
