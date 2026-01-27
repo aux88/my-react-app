@@ -1,15 +1,16 @@
 import { Button } from "../button/Button";
+import { useTasks } from "../hooks/useTasks";
 
-interface StatusFilterProps {
-    status: string[];
-    selected?: string;
-}
+const status:string[] = ["すべて","未完了","完了済み"];
 
-export const StatusFilter = ({status,selected}:StatusFilterProps) => {
+export const StatusFilter = () => {
+
+    const {currentFilter, setCurrentFilter} = useTasks();
+    
     return (
         <>
             {status.map((item)=>(
-                <Button type="filter" isActive={item===selected} onClick={()=>console.log(`${item}`)} key={item}>{item}</Button>
+                <Button type="filter" isActive={item===currentFilter} onClick={()=>setCurrentFilter(item)} key={item}>{item}</Button>
             ))}
         </>
     );

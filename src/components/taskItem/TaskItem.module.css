@@ -1,6 +1,6 @@
 .task {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     gap: 12px;
     padding: 16px;
     padding-right: 52px;
@@ -19,15 +19,17 @@
     accent-color: #0d6efd;
 }
 
-.task label {
+.task label, .task input[type="text"] {
     flex-grow: 1;
     font-size: 16px;
     color: #333;
+    cursor: text;
 }
 
 
 .task label:hover {
     background-color: #eee;
+
 }
 
 .task:hover {
