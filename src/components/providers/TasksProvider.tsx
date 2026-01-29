@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { TasksContext, type TasksContextType } from "../contexts/TasksContext";
 import type { Task } from "../types/Task";
 
@@ -29,7 +29,7 @@ export const TaskProvider = ({ children }:TaskContextProviderProps) => {
     setStoredValue(JSON.stringify(tasks));
   },[tasks]);
 
-  const addTask = (title :string, priority :number) => {
+  const addTask = useCallback((title :string, priority :number) => {
     setTasks([
       ...tasks,
       { priority: priority,
@@ -39,23 +39,33 @@ export const TaskProvider = ({ children }:TaskContextProviderProps) => {
         isCompleted: false,
       },
     ]);
-  };
+  },[tasks]);
 
-  const deleteTask = (targetId :string) => {
+  const deleteTask = useCallback((targetId :string) => {
     setTasks(tasks.filter((task) => task.taskId !== targetId));
-  };
+  },[tasks]);
 
-  const toggleTaskCompletion = (targetId :string) => {
+  const toggleTaskCompletion = useCallback((targetId :string) => {
     setTasks(tasks.map((task)=>
       task.taskId===targetId ? {...task, isCompleted: !task.isCompleted} : task));
-  }
+  },[tasks]);
 
-  const editTaskTitle = (targetId :string, newTitle :string) => {
+  const editTaskTitle = useCallback((targetId :string, newTitle :string) => {
     setTasks(tasks.map((task)=>
       task.taskId===targetId ? {...task, title: newTitle} : task));
-  }
+  },[tasks]);
 
-  const value :TasksContextType = { 
+  const value :TasksContextType = useMemo(()=>({ 
+    tasks,
+    currentFilter, 
+    setCurrentFilter,
+    currentSort,
+    setCurrentSort,
+    addTask,
+    deleteTask,
+    toggleTaskCompletion,
+    editTaskTitle
+  }),[
     tasks, 
     currentFilter, 
     setCurrentFilter,
@@ -65,7 +75,7 @@ export const TaskProvider = ({ children }:TaskContextProviderProps) => {
     deleteTask,
     toggleTaskCompletion,
     editTaskTitle
-  };
+  ]);
 
   return <TasksContext.Provider value={value}>{children}</TasksContext.Provider>;
 };
