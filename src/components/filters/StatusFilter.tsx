@@ -1,12 +1,13 @@
+import { memo } from "react";
 import { Button } from "../button/Button";
 import { useTasks } from "../hooks/useTasks";
 
 const status:string[] = ["すべて","未完了","完了済み"];
 
-export const StatusFilter = () => {
+export const StatusFilter = memo(() =>{
 
     const {currentFilter, setCurrentFilter} = useTasks();
-    
+
     return (
         <>
             {status.map((item)=>(
@@ -14,4 +15,4 @@ export const StatusFilter = () => {
             ))}
         </>
     );
-}
+});

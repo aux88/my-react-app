@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { TasksContext, type TasksContextType } from "../contexts/TasksContext";
 import type { Task } from "../types/Task";
 
+import useLocalStorage from "../hooks/useLocalStorage"
+
 interface TaskContextProviderProps {
   children: React.ReactNode;
 }
@@ -10,23 +12,21 @@ export const TaskProvider = ({ children }:TaskContextProviderProps) => {
 
   const defaultFilter: string = "すべて";
   const defaultSort: number = 1; // 作成日時;
+  const defaultTasks: Task[] =[];
+  const [storedValue, setStoredValue] = useLocalStorage("tasks",JSON.stringify(defaultTasks));
 
-  const [tasks, setTasks] = useState<Task[]>(()=>{
-    // tasksの初期値はLocalStrageから読み込む
-    const strageData = localStorage.getItem('tasks');
-    const defaultTasks: Task[] =[];
-    if(strageData){
-      return JSON.parse(strageData);
-    }else{
-      return defaultTasks;
-    }
-  });
+  const [tasks, setTasks] = useState<Task[]>(() => {
+    try {
+      return JSON.parse(storedValue);
+    } catch {
+      return [];
+  }});
 
   const [currentFilter, setCurrentFilter] = useState(defaultFilter);
   const [currentSort, setCurrentSort] = useState(defaultSort);
 
   useEffect(()=>{
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    setStoredValue(JSON.stringify(tasks));
   },[tasks]);
 
   const addTask = (title :string, priority :number) => {
@@ -54,8 +54,6 @@ export const TaskProvider = ({ children }:TaskContextProviderProps) => {
     setTasks(tasks.map((task)=>
       task.taskId===targetId ? {...task, title: newTitle} : task));
   }
-
-  console.log("TaskProviderレンダリング");
 
   const value :TasksContextType = { 
     tasks, 

@@ -53,14 +53,11 @@ const createFilteredTask = (tasks:Task[], selectedStatus:string, sortKey:number)
   }else{
     sortByTitle(newTasks);
   }
-
-  console.log(newTasks);
   return newTasks;
 }
 
 export const TaskList = () => {
 
-  console.log("TaskListレンダリング");
   const { tasks, currentFilter, currentSort } = useTasks();
 
   const previewTasks:Task[] = createFilteredTask(tasks,currentFilter,currentSort);

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styles from "./Select.module.css";
 
 interface SelectProps {
@@ -11,7 +12,7 @@ export interface SelectItem {
     value: number;
 }
 
-export const Select = ({items, onChange, value}:SelectProps) => {
+export const Select = memo(({items, onChange, value}:SelectProps) => {
 
     return (
         <select className={styles.select} onChange={(e) => onChange(e.target.value)} value={value}>
@@ -20,4 +21,4 @@ export const Select = ({items, onChange, value}:SelectProps) => {
             ))}
         </select>
     );
-};
+});

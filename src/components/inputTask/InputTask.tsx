@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { Button } from "../button/Button";
-import { useTasks } from "../hooks/useTasks";
+import { memo, useState } from "react";
 import { Select, type SelectItem } from "../select/Select";
 import styles from "./InputTask.module.css";
+import { AddButton } from "../button/AddButton";
 
 const selectItems : SelectItem[] = [
     {label: "高優先度", value:1},
@@ -10,9 +9,8 @@ const selectItems : SelectItem[] = [
     {label: "低優先度", value:3},
 ]
 
-export const InputTask = () => {
-    console.log("InputTaskレンダリング");
-    const { addTask } = useTasks();
+
+export const InputTask = memo(() => {
     
     const [ title, setTitle ] = useState("");
     const [ priority, setPriority ] = useState(1);
@@ -22,10 +20,7 @@ export const InputTask = () => {
         setTitle(value)
     }
 
-    const onClickEvent = () => {
-        addTask(title,priority);
-
-        // 入力欄リセット
+    const reset = () => {
         setTitle("");
         setPriority(1);
     }
@@ -34,7 +29,7 @@ export const InputTask = () => {
         <div className={styles.addTask}>
             <input type="text" placeholder="新しいタスクを入力..." onChange={(e)=>onChangeTitle(e.target.value)} value={title}/>
             <Select items={selectItems} onChange={(value) => setPriority(Number(value))} value={priority.toString()} />
-            <Button type="add" onClick={onClickEvent}>追加</Button>
+            <AddButton title={title} priority={priority} reset={reset}/>
         </div>
     );
-};
+});

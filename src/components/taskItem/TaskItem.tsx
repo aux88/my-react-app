@@ -50,7 +50,7 @@ export const TaskItem = ({task}:TaskItemProps) =>{
                 (<label
                     className={isCompleted ? styles.delete : ""}
                     onDoubleClick={(e) => {e.preventDefault();setIsEditing(true);}}>{task.title}</label>):
-                (<input type="text" onChange={(e)=>onChangeTitle(e.target.value)} value={title} onBlur={handleFinishEditing} onKeyDown={handleKeyDown}/>)}
+                (<input type="text" autoFocus={true} onChange={(e)=>onChangeTitle(e.target.value)} value={title} onBlur={handleFinishEditing} onKeyDown={handleKeyDown}/>)}
                 <button className={styles.deleteButton} onClick={()=>deleteTask(task.taskId)}>×</button>
         </li>
     );
