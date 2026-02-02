@@ -1,21 +1,20 @@
-// src/hooks/useLocalStorage.js
 import { useState } from "react";
 
-function useLocalStorage(key :string,initialValue: string) {
+function useLocalStorage(key :string, initialValue: string) {
 
     const [storedValue, setStoredValue] = useState(()=>{
     // 初期化時に localStorage からデータを取得
     // SSR 環境では window がないため、利用環境によってはガードが必要
-    if (typeof window === "undefined") {
-        return initialValue;
-    }
-    try {
-        const storageData = localStorage.getItem(key);
-        return storageData ? storageData: initialValue; 
-    }catch(err){
-        console.error(err);
-        return initialValue;
-    }
+        if (typeof window === "undefined") {
+            return initialValue;
+        }
+        try {
+            const storageData = localStorage.getItem(key);
+            return storageData ? storageData: initialValue; 
+        }catch(err){
+            console.error(err);
+            return initialValue;
+        }
     });
 
     const setValue = (value: string) => {
