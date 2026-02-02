@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 // renderでコンポーネントを仮想的に描画、fireEventでイベント発火をシミュレート
 import { vi, test, expect } from 'vitest';
 import { InputTask } from "./InputTask";
