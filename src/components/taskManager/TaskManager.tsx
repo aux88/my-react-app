@@ -1,7 +1,7 @@
 import { TaskList } from "../taskList/TaskList";
 import { InputTask } from "../inputTask/InputTask";
 import { Filters } from "../filters/Filters";
-import styles from "./TaskManager.module.css";
+import styles from "./TaskManager.module.css"
 import { TaskProvider } from "../providers/TasksProvider"
 
 export const TaskManager = () => {
